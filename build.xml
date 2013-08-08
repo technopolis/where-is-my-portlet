@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE project>
+
+<project name="WhereIsMyPortlet-portlet" basedir="." default="deploy">
+	<import file="../build-common-portlet.xml" />
+	
+	<target name="deploy-jenkins">
+		
+		<delete dir="tempDist" />
+		
+		<echo message="REVISION NUMBER:${SVN_REVISION}"/>
+		<echo message="PROJECT_NAME:${PROJECT_NAME}"/>
+		
+		<propertyfile file="docroot/WEB-INF/liferay-plugin-package.properties">
+			<entry key="module-incremental-version" type="string" value="${SVN_REVISION}" />
+		</propertyfile>
+		<echo>CHANGED LOCALLY THE FILE docroot/WEB-INF/liferay-plugin-package.properties WITH REVISION ${SVN_REVISION}</echo>
+		
+		<ant target="clean" inheritall="false" />
+		
+		<ant target="deploy" inheritall="false"/>
+		
+		<path id="warsPath">
+			<fileset dir="../../dist">
+				<include name="*${SVN_REVISION}.war" />
+			</fileset>
+		</path>
+		
+		<timestampselector property="most.recent.war" pathref="warsPath" count="1" pathsep=";" />
+		
+		<echo message="GOT ${most.recent.war}" />
+		
+		<mkdir dir="tempDist"/>
+		
+		<copy file="${most.recent.war}" todir="tempDist"/>
+
+		<!--
+		<basename property="filename" file="${most.recent.war}"/>
+		<copyfile dest="tempDist/${filename}" src="${most.recent.war}"/>
+		-->
+	</target>
+</project>
+
