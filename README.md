@@ -17,7 +17,7 @@ Just put the code in a directory, in the portlers directory of your Liferay SDK.
 Just run the ant script.
 
 #Documentation
-The documentation is [here](https://docs.google.com/document/d/1JSRcCqJaG8QbTtOoaqJMCsyRB_qU5wAkHKguIkTacEI).
+The documentation is [here](https://docs.google.com/document/d/1JSRcCqJaG8QbTtOoaqJMCsyRB_qU5wAkHKguIkTacEI). But you can find it also under the help but in the portlet.
 #Screenshots
 ![image 7][7]
 
