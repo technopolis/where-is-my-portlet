@@ -57,6 +57,7 @@ function submitLayoutsForm() {
 </script>
 
 <div id="<portlet:namespace/>results">
+
 	<liferay-ui:search-container emptyResultsMessage="site-portlets-no-layouts-were-found">
 	<liferay-ui:search-container-results results="<%=portlets %>" total="<%=portlets.size() %>"/>
 
@@ -76,9 +77,12 @@ function submitLayoutsForm() {
 		%>
 		
 			<liferay-ui:search-container-column-text name="site-portlets-portlet-id">
-				<img src="<%= portlet.getPortlet().getIcon()%>"/>
+				<% if (!Validator.isNull(portlet.getPortlet().getIcon())){%>
+					<img src="<%= portlet.getPortlet().getIcon()%>"/>
+				<% }%>
 				<portlet:renderURL var="portletPopUpURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
 			   		<portlet:param name="portletId" value="<%=portlet.getPortlet().getPortletId()%>"/>
+			   		<portlet:param name="layoutPlid" value="<%=Long.toString(portlet.getLayout().getPlid())%>"/>
 			   		<portlet:param name="jspPage" value="/html/where-is-my-portlet/portletPopUp.jsp"/>
 			   	</portlet:renderURL>
 			   	
