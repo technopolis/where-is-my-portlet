@@ -158,6 +158,7 @@ AUI().use('get', function(A){
 								layoutView.getLayout().getName(themeDisplay.getLocale()) + " </a>";
 								
 				String goToLayoutUrl = WhereIsMyPortletUtil.getLayoutHREF(layoutView.getLayout(), themeDisplay, true, "Go to this portal page...", "tooltip", showBaseUrl, selectedPrivate);
+
 				%>
 				
 				<liferay-ui:search-container-column-text
@@ -183,6 +184,7 @@ AUI().use('get', function(A){
 					%>
 					<portlet:renderURL var="portletPopUpURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
 				   		<portlet:param name="portletId" value="<%=layoutPortlet.getPortletId()%>"/>
+				   		<portlet:param name="layoutPlid" value="<%=Long.toString(layoutView.getLayout().getPlid())%>"/>
 				   		<portlet:param name="jspPage" value="/html/where-is-my-portlet/portletPopUp.jsp"/>
 				   	</portlet:renderURL>
 				   	<div>
@@ -221,8 +223,9 @@ AUI().use('get', function(A){
 				<liferay-ui:search-container-column-text name="actions">		
 					<liferay-ui:icon-menu >
 						<liferay-ui:icon image="view_tasks"  message="goToLayoutsTab" url="<%=showLayoutPortletsFromTableURL.toString() %>" />
-						<liferay-ui:icon image="view_templates" target="_blank" message="goToLayout" url="<%=layoutView.getLayout().getFriendlyURL()%>" />
+						<liferay-ui:icon image="view_templates" target="_blank" message="goToLayout" url="<%=WhereIsMyPortletUtil.getLayoutUrl(themeDisplay, layoutView.getLayout(), selectedPrivate)%>" />
 					</liferay-ui:icon-menu>
+
 				</liferay-ui:search-container-column-text>
 			
 			</liferay-ui:search-container-row>

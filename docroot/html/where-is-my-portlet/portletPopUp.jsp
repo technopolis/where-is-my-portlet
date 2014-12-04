@@ -6,10 +6,12 @@
 
 <%
 String popupPortletId = ParamUtil.getString(renderRequest, "portletId");
+Long popupLayoutPlid = ParamUtil.getLong(renderRequest, "layoutPlid");
 Portlet popupPortlet = PortletLocalServiceUtil.getPortletById(themeDisplay.getCompanyId(), popupPortletId);
+Layout popupLayout = LayoutLocalServiceUtil.getLayout(popupLayoutPlid);
 long portletPlid = PortalUtil.getPlidFromPortletId(themeDisplay.getScopeGroupId(), popupPortlet.getPortletId());
-String portletBarName = WhereIsMyPortletUtil.getPortletTitleBarName(themeDisplay, popupPortlet.getPortletId(), popupPortlet.getDisplayName());
-PortletView portletView = new PortletView(popupPortlet);
+String portletBarName = WhereIsMyPortletUtil.getPortletTitleBarName(themeDisplay, popupPortlet.getPortletId(), popupPortlet.getDisplayName(), portletPlid);
+PortletView portletView = new PortletView(popupPortlet, popupLayout);
 %>
 
 <div id="<portlet:namespace/>details">
@@ -21,7 +23,7 @@ PortletView portletView = new PortletView(popupPortlet);
 		<br><liferay-ui:message key="pluginType"/>: <%= popupPortlet.getPluginType() %>
 		<br><liferay-ui:message key="rootPortletId"/>: <%= popupPortlet.getRootPortletId() %>
 		<br><liferay-ui:message key="instanceId"/>: <%= popupPortlet.getInstanceId() %>
-		<br><liferay-ui:message key="firendlyUrlMapping"/>: <%= popupPortlet.getFriendlyURLMapping() %>
+		<br><liferay-ui:message key="friendlyUrlMapping"/>: <%= popupPortlet.getFriendlyURLMapping() %>
 		<br><liferay-ui:message key="portletInstanceId"/>: <%= popupPortlet.getInstanceId()%>
 		
 		<liferay-ui:message key="instanciable"/>: <img src="<%= request.getContextPath()%>/images/<%= popupPortlet.getInstanceable()%>.png"/>
