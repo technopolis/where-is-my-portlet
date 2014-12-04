@@ -74,11 +74,12 @@ function submitLayoutsForm() {
 		<%
 		String goToLayoutLinkIcon = "<a title='Find out on which pages this portlet is...' class='tooltip' href='" + showPortletLayoutsFromTableURL + "'><img src='" + request.getContextPath() + "/images/application_go.png'/> " + portlet.getPortlet().getDisplayName() + " </a>";
 		String portletNameBar = portlet.getPortletBarName(themeDisplay);
+		String iconUrl = WhereIsMyPortletUtil.getIconUrl(portlet.getPortlet());
 		%>
 		
 			<liferay-ui:search-container-column-text name="site-portlets-portlet-id">
-				<% if (!Validator.isNull(portlet.getPortlet().getIcon())){%>
-					<img src="<%= portlet.getPortlet().getIcon()%>"/>
+				<% if (iconUrl!=null){%>
+					<img src="<%= iconUrl %>"/>
 				<% }%>
 				<portlet:renderURL var="portletPopUpURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
 			   		<portlet:param name="portletId" value="<%=portlet.getPortlet().getPortletId()%>"/>
