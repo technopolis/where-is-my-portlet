@@ -221,6 +221,13 @@ public class WhereIsMyPortletUtil implements Constants {
 		return portletDisplayName;
 	}
 	
+	public static String getIconUrl(Portlet portlet) {
+		if (portlet==null || Validator.isNull(portlet.getIcon()))
+			return null;
+		else
+			return portlet.getContextPath() + portlet.getIcon();
+	}
+	
 	/**
 	 * If selectedPortlet is null, the we will try to get the first portlet of the available pages. If no portletName available then 
 	 * the result will be an empty array
